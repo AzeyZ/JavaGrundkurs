@@ -2,6 +2,7 @@ package memory;
 
 
 public class MemoryBoard {
+	private int[][] board;
 
 	/** Skapar ett memorybräde med size * size kort. backFileName är filnamnet 
 	    för filen med baksidesbilden. Vektorn frontFileNames innehåller filnamnen 
