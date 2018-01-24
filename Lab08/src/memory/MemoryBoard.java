@@ -3,13 +3,16 @@ package memory;
 
 public class MemoryBoard {
 	private int[][] board;
+	
 
 	/** Skapar ett memorybräde med size * size kort. backFileName är filnamnet 
 	    för filen med baksidesbilden. Vektorn frontFileNames innehåller filnamnen 
 	    för frontbilderna. */
 	public MemoryBoard(int size, String backFileName, String[] frontFileNames) {
 		this.board = new int[size][size];
-		
+		for(int i=0;i<size*size;i++) {
+			MemoryCardImage cardImage = new MemoryCardImage(backFileName,frontFileNames[i]);
+		}
 		
 	}
 
