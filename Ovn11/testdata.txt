@@ -1,0 +1,15 @@
+Lund
+Dalby
+Sandby
+Hällestad
+Flyinge
+Veberöd
+*
+Lund Dalby 12
+Lund Sandby 12
+Dalby Veberöd 11
+Dalby Hällestad 5
+Sandby Lund 12
+Sandby Hällestad 8
+Sandby Flyinge 4
+Hällestad Veberöd 8
