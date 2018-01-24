@@ -8,7 +8,7 @@ public class MemoryBoard {
 	    för filen med baksidesbilden. Vektorn frontFileNames innehåller filnamnen 
 	    för frontbilderna. */
 	public MemoryBoard(int size, String backFileName, String[] frontFileNames) {
-
+		this.board = new int[size][size];
 	}
 
 	/* Skapar size * size / 2 st memorykortbilder.
