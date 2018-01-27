@@ -64,12 +64,12 @@ public class MemoryBoard {
 
 	/** Vänder kortet på rad r, kolonn c. */
 	public void turnCard(int r, int c) {
-		board[r][c] = new MemoryCardImage(board[r][c].getBack(),(board[r][c].getFront());
+		//board[r][c] = new MemoryCardImage(board[r][c].getBack(),(board[r][c].getFront());
 	}
 	
 	/** Returnerar true om kortet r, c har framsidan upp. */
 	public boolean frontUp(int r, int c) {
-		if(board[r][c].getFront().equals) {
+		//if(board[r][c].getFront().equals) {
 			
 		}
 		return false;
@@ -89,7 +89,7 @@ public class MemoryBoard {
 		boolean won = false;
 		for(int i = 0; i < size; i++) {
 			for( int j = 0; j < size; j++) {
-				if(board[i][j].getFront().equals() 
+				//if(board[i][j].getFront().equals() 
 			}
 		}
 		return won;
