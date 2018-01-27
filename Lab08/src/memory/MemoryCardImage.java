@@ -22,6 +22,7 @@ public class MemoryCardImage {
 	/** Returnerar bilden på framsidan. */
 	public Image getFront() {
 		return front;
+		
 	}
 	
 	/** Returnerar bilden på baksidan. */
