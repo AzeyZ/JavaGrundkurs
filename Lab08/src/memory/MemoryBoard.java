@@ -4,55 +4,42 @@ import java.util.Random;
 
 public class MemoryBoard {
 	private MemoryCardImage[][] board;
-	private int size;
-	private String backFileName;
-	private String[] frontFileNames;
+	private MemoryCardImage[] cards;
+	private boolean[][] frontUp;
 	
-
 	/** Skapar ett memorybräde med size * size kort. backFileName är filnamnet 
 	    för filen med baksidesbilden. Vektorn frontFileNames innehåller filnamnen 
 	    för frontbilderna. */
 	public MemoryBoard(int size, String backFileName, String[] frontFileNames) {
-		this.board = new MemoryCardImage[size][size];
-		this.size = size;
-		this.backFileName = backFileName;
-		this.frontFileNames = frontFileNames;
-
-		
+		board = new MemoryCardImage[size][size];
+		frontUp = new boolean[size][size];
+		cards = new MemoryCardImage[size*size/2];
+		createCards(backFileName, frontFileNames);	
 	}
 
 	/* Skapar size * size / 2 st memorykortbilder.
 	   Placerar ut varje kort på två slumpmässiga ställen på spelplanen. */
 	private void createCards(String backFileName, String[] frontFileNames) {
-		
-			String[] framsidor = new String[size*size];
-			int factor = 0;
-			for (int i = 0; i < framsidor.length; i++) {
-				framsidor[i] = frontFileNames[factor];
-				if(i == ((size*size/2)-1)) {
-					factor=0;
-				}
-				factor++;
-			}
-			
 			Random r = new Random();
-			int n = size*size;
-			for(int rows = 0; rows < size; rows++) {
-				
-				for (int cols = 0; cols < size; cols++) {
-					int rand = r.nextInt(n);
-					this.board[rows][cols] = new MemoryCardImage(framsidor[rand],backFileName);
-					frontFileNames[rand] = frontFileNames[rand-1];
-					frontFileNames[rand-1] =null;				
-					n--;
+			for(int i = 0; i <cards.length; i++) {
+				cards[i] = new MemoryCardImage(backFileName, frontFileNames[i]);
+				for(int j = 0; j < 2; j++) {
+					int rows = r.nextInt(getSize());
+					int cols = r.nextInt(getSize());
+					while (!(board[rows][cols] == null))
+					{
+						rows = r.nextInt(getSize());
+						cols = r.nextInt(getSize());
+					}
+					board[rows][cols] = cards[i];
+					//frontUp[rows][cols] = false;
 				}
 			}
-			
 	}
-
+	
 	/** Tar reda på brädets storlek. */
 	public int getSize() {
-		return size;
+		return board.length;
 	}
 	
 	/** Hämtar den tvåsidiga bilden av kortet på rad r, kolonn c.
@@ -64,13 +51,18 @@ public class MemoryBoard {
 
 	/** Vänder kortet på rad r, kolonn c. */
 	public void turnCard(int r, int c) {
-		//board[r][c] = new MemoryCardImage(board[r][c].getBack(),(board[r][c].getFront());
+		if(!frontUp[r][c]) {
+			frontUp[r][c] = true;
+		}
+		else {
+			frontUp[r][c] = false;
+		}
 	}
 	
 	/** Returnerar true om kortet r, c har framsidan upp. */
 	public boolean frontUp(int r, int c) {
-		//if(board[r][c].getFront().equals) {
-			
+		if(frontUp[r][c]) {
+			return true;
 		}
 		return false;
 	}
@@ -83,15 +75,18 @@ public class MemoryBoard {
 		}
 		return false;
 	}
-
+	
 	/** Returnerar true om alla kort har framsidan upp. */
 	public boolean hasWon() {
-		boolean won = false;
-		for(int i = 0; i < size; i++) {
-			for( int j = 0; j < size; j++) {
-				//if(board[i][j].getFront().equals() 
+		int frontup = 0;
+		for(int r = 0; r < frontUp.length/2; r++) {
+			for( int c = 0; c < frontUp.length/2; c++) {
+				if(frontUp[r][c]) frontup++;
 			}
 		}
-		return won;
+		if(frontup == board.length) {
+			return true;
+		}
+		return false;
 	}	
 }
