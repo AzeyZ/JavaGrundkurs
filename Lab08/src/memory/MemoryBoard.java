@@ -22,7 +22,7 @@ public class MemoryBoard {
 	private void createCards(String backFileName, String[] frontFileNames) {
 			Random r = new Random();
 			for(int i = 0; i <cards.length; i++) {
-				cards[i] = new MemoryCardImage(backFileName, frontFileNames[i]);
+				cards[i] = new MemoryCardImage(frontFileNames[i],backFileName);
 				for(int j = 0; j < 2; j++) {
 					int rows = r.nextInt(getSize());
 					int cols = r.nextInt(getSize());
@@ -62,8 +62,10 @@ public class MemoryBoard {
 	/** Returnerar true om kortet r, c har framsidan upp. */
 	public boolean frontUp(int r, int c) {
 		if(frontUp[r][c]) {
+			
 			return true;
 		}
+		
 		return false;
 	}
 	
@@ -79,12 +81,12 @@ public class MemoryBoard {
 	/** Returnerar true om alla kort har framsidan upp. */
 	public boolean hasWon() {
 		int frontup = 0;
-		for(int r = 0; r < frontUp.length/2; r++) {
-			for( int c = 0; c < frontUp.length/2; c++) {
+		for(int r = 0; r < getSize(); r++) {
+			for( int c = 0; c < getSize(); c++) {
 				if(frontUp[r][c]) frontup++;
 			}
 		}
-		if(frontup == board.length) {
+		if(frontup == getSize()*getSize()) {
 			return true;
 		}
 		return false;
