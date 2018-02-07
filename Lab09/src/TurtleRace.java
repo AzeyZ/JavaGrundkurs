@@ -24,7 +24,7 @@ public class TurtleRace {
 			}
 		}
 		for(int k = 0; k< 3; k++) {
-			System.out.println("PÃ¥ plats " + (k+1) + ": " + finished.get(k).toString());
+			System.out.println("På plats " + (k+1) + ": " + finished.get(k));
 		}
 	}
 }
