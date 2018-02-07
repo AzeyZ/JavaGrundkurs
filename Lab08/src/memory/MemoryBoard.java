@@ -1,5 +1,4 @@
 package memory;
-
 import java.util.Random;
 
 public class MemoryBoard {
@@ -32,7 +31,6 @@ public class MemoryBoard {
 						cols = r.nextInt(getSize());
 					}
 					board[rows][cols] = cards[i];
-					//frontUp[rows][cols] = false;
 				}
 			}
 	}
@@ -45,7 +43,6 @@ public class MemoryBoard {
 	/** Hämtar den tvåsidiga bilden av kortet på rad r, kolonn c.
 	    Raderna och kolonnerna numreras från 0 och uppåt. */
 	public MemoryCardImage getCard(int r, int c) {
-		
 		return board[r][c];
 	}
 
@@ -57,6 +54,7 @@ public class MemoryBoard {
 		else {
 			frontUp[r][c] = false;
 		}
+		//frontUp[r][c] = !frontUp[r][c];
 	}
 	
 	/** Returnerar true om kortet r, c har framsidan upp. */
@@ -67,6 +65,8 @@ public class MemoryBoard {
 		}
 		
 		return false;
+		
+		//return frontUp[r][c]
 	}
 	
 	/** Returnerar true om det är samma kort på rad r1, kolonn c2 som på rad r2, 

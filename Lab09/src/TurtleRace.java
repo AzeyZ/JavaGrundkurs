@@ -17,6 +17,7 @@ public class TurtleRace {
 				if(turtleList.get(j).getX()>=w.X_END_POS) {
 					finished.add(turtleList.get(j));
 					turtleList.remove(j);
+					j--;
 				}
 				if(turtleList.size()== 0) {
 					gameOver = true;
