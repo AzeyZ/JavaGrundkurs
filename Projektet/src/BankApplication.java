@@ -21,7 +21,7 @@ public class BankApplication {
 			System.out.print("id: ");
 			long idSearch = scanLong();
 			for(int print = 0; print < Bank.findAccountsForHolder(idSearch).size();print++ )
-			System.out.println(Bank.findAccountsForHolder(idSearch).get(print));
+				System.out.println(Bank.findAccountsForHolder(idSearch).get(print));
 			break;
 		case 2:  
 			scan.nextLine();
@@ -52,7 +52,7 @@ public class BankApplication {
 			}			
 			break;
 		case 5: 
-			System.out.print("frÂn konto: ");
+			System.out.print("fr√•n konto: ");
 			long accFrom = scanLong();
 			scan.nextLine();
 			System.out.print("till konto: ");
@@ -89,15 +89,15 @@ public class BankApplication {
 			GO = false;
 			break;
 		}
-
 	}
 
 	public void printMenu() {
-		System.out.println("1. Hitta konto utifrÂn innehavare");
-		System.out.println("2. Sˆk kontoinnehavare utifrÂn (del av) namn");
-		System.out.println("3. S‰tt in");
+		System.out.println("-------------------------------------------------------------------------------");
+		System.out.println("1. Hitta konto utifr√•n innehavare");
+		System.out.println("2. s√∂k kontoinnehavare utifr√•n (del av) namn");
+		System.out.println("3. s√§tt in");
 		System.out.println("4. Ta ut");
-		System.out.println("5. ÷verfˆring");
+		System.out.println("5. √∂verf√∂ring");
 		System.out.println("6. Skapa konto");
 		System.out.println("7. Ta bort konto");
 		System.out.println("8. Skriv ut konton");
@@ -107,53 +107,63 @@ public class BankApplication {
 
 	public int scanIntVal() { 
 		int i = 0;
-		try
-		{
-			i = scan.nextInt();
-			if(!(i<10 && i>0)) {
-				System.out.println("Skriv en siffra mellan 0 till 9");
-				printMenu();
-				scanIntVal();
+		boolean ok = false;
+		while(!ok) {
+			try
+			{
+				ok = true;
+				i = scan.nextInt();
+				if(!(i<10 && i>0)) {
+					System.out.println("Skriv en siffra mellan 0 till 9");
+					printMenu();
+				}
 			}
-		}
-		catch (Exception e)
-		{
-			System.out.println("Du mÂste skriva en siffra mellan 1 och 9");
-			printMenu();
-			scan.nextLine();
-			scanIntVal();
+			catch (Exception e)
+			{
+				System.out.println("Du m√•ste skriva en siffra mellan 1 och 9");
+				printMenu();
+				scan.nextLine();
+				ok = false;
+			}
 		}
 		return i;
 	}
 
 	public String scanString() { 
 		String s = "error";
-		try
-		{
-			s = scan.nextLine();
-
-		}
-		catch (Exception e)
-		{
-			System.out.println("Du ska skriva ett namn");
-			printMenu();
-			scan.nextLine();
-			scanString();
+		boolean ok = false;
+		while(!ok) {
+			try
+			{
+				ok = true;
+				s = scan.nextLine();
+			}
+			catch (Exception e)
+			{
+				System.out.println("Du ska skriva ett namn");
+				printMenu();
+				scan.nextLine();
+				ok = false;
+			}
 		}
 		return s;
 	}
 
 	public long scanLong() { 
 		long i = 0;
-		try
-		{
-			i = scan.nextLong();
-		}
-		catch (Exception e)
-		{
-			System.out.println("Du ska skriva en siffra");
-			scan.nextLine();
-			scanLong();
+		boolean ok = false;
+		while(!ok) {
+			try
+			{
+				ok = true;
+				i = scan.nextLong();
+			}
+			catch (Exception e)
+			{
+				System.out.println("Du m√•ste skriva en siffra");
+				scan.nextLine();
+				ok = false;
+			}
 		}
 		return i;
 	}

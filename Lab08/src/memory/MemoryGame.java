@@ -10,13 +10,13 @@ public class MemoryGame {
 		String backFileName = "back.jpg";
 		boolean playagain = true;
 		while(playagain){
-			int försök = 0;
+			int fÃ¶rsÃ¶k = 0;
 			MemoryBoard board = new MemoryBoard(4,backFileName,frontFileNames);
 			MemoryWindow window = new MemoryWindow(board);
 			window.drawBoard();
 			
 			while(!board.hasWon()) {
-				försök++;
+				fÃ¶rsÃ¶k++;
 				int r1 = 0;
 				int c1 = 0;
 				int r2 = 0;
@@ -51,8 +51,8 @@ public class MemoryGame {
 					window.drawCard(r2, c2);
 				}
 			}
-			System.out.println("Du vann med " + försök + " försök, Vill du spela igen?");
-			System.out.println("Skriv y för att spela igen");
+			System.out.println("Du vann med " + fÃ¶rsÃ¶k + " fï¿½rsï¿½k, Vill du spela igen?");
+			System.out.println("Skriv y fï¿½r att spela igen");
 			Scanner scan = new Scanner(System.in);
 			if(!scan.next().equals("y")) {
 				playagain = false;
