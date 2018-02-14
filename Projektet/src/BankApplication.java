@@ -7,19 +7,15 @@ public class BankApplication {
 	public static void main(String [] args) {
 		BankApplication b = new BankApplication();
 		b.runApplication();
+		b.runApplication();
 	}
 
 	public void runApplication() {
 		printMenu();
 		int val = scanIntVal();
 		switch (val) {
-		case 6:
-			System.out.print("namn: ");
-			String namn = new String(scanString());
-			scan.nextLine();
-			System.out.println("id: ");
-			int id = scanInt();
-			System.out.println("konto skapat: "+ Bank.addAccount(namn, id));
+		case 1:
+			
 			break;
 		case 2:  
 			break;
@@ -29,8 +25,13 @@ public class BankApplication {
 			break;
 		case 5: 
 			break;
-		case 1:
-			
+		case 6:
+			System.out.print("namn: ");
+			String namn = new String(scanString());
+			scan.nextLine();
+			System.out.print("id: ");
+			long id = scanInt();
+			System.out.println("konto skapat: "+ Bank.addAccount(namn, id));
 			break;
 		case 7: 
 			break;

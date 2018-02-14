@@ -7,8 +7,7 @@ public class BankAccount {
 	
 	public BankAccount(long holderId, String holderName) {
 		this.customer = new Customer(holderName, holderId);
-		String s = new String("55" + AccNbrGenerator );
-		AccountNbr = Long.valueOf(s).longValue();
+		AccountNbr = AccNbrGenerator;
 		balance = 0;
 		AccNbrGenerator++;
 	}
