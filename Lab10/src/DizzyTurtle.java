@@ -1,12 +1,10 @@
 import java.util.Random;
 
 public class DizzyTurtle extends RaceTurtle {
-	int nbr;
-	int yrsel;
-	Random rnd;
+	private int yrsel;
+	private Random rnd;
 	public DizzyTurtle(RaceWindow w, int nbr, int yrsel) {
 		super(w, nbr);
-		this.nbr = nbr;
 		Random rnd = new Random();
 		this.rnd = rnd;
 		this.yrsel = yrsel;
@@ -23,7 +21,7 @@ public class DizzyTurtle extends RaceTurtle {
 	}
 	
 	public String toString() {
-		String nummer = "Nummer " + nbr + "  - DizzyTurtle" + " (Yrsel : " + yrsel+ ")";
+		String nummer = super.toString() + "  - DizzyTurtle" + " (Yrsel : " + yrsel + ")";
 		return nummer;
 	}
 }
