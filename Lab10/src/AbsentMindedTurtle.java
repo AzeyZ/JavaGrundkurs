@@ -1,13 +1,11 @@
 import java.util.Random;
 
 public class AbsentMindedTurtle extends RaceTurtle {
-	int absent;
-	int nbr;
+	private int absent;
 
 	public AbsentMindedTurtle(RaceWindow w, int nbr, int absent) {
 		super(w, nbr);
 		this.absent = absent;
-		this.nbr = nbr;
 	}
 	
 	public void raceStep(){
@@ -19,7 +17,7 @@ public class AbsentMindedTurtle extends RaceTurtle {
 	}
 	
 	public String toString() {
-		String nummer = "Nummer " + nbr + "  - AbsentMindedTurtle " + "(" + absent + "% Frånvarande)";
+		String nummer = super.toString() + "  - AbsentMindedTurtle " + "(" + absent + "% Frånvarande)";
 		return nummer;
 	}
 	

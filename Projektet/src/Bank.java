@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Bank {
 
-	private ArrayList <BankAccount> Accounts;
+	private ArrayList <BankAccount> Accounts = new ArrayList<BankAccount>();
 
 
 	public long addAccount(String holderName, long idNr) {

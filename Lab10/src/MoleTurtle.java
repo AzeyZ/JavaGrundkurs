@@ -1,15 +1,14 @@
 import java.util.Random;
 
 public class MoleTurtle extends RaceTurtle {
-	private int nbr;
-
+	private Random rnd = new Random();
+	
 	public MoleTurtle(RaceWindow w, int nbr) {
 		super(w, nbr);
-		this.nbr = nbr;
 	}
 	
 	public void raceStep(){
-		Random rnd = new Random();
+		
 		int dig = rnd.nextInt(2);
 		if(dig==0) {
 			penDown();
@@ -21,7 +20,7 @@ public class MoleTurtle extends RaceTurtle {
 	}
 	
 	public String toString() {
-		String nummer = "Nummer " + nbr + "  - MoleTurtle";
+		String nummer = super.toString() + "  - MoleTurtle";
 		return nummer;
 	}
 	

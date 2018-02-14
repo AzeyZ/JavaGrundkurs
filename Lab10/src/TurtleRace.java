@@ -12,7 +12,7 @@ public class TurtleRace {
 		for ( int i = 0; i< 8; i++) {
 			int R = rnd.nextInt(3);
 			if(R==0) turtleList.add(new MoleTurtle(w,(i+1)));
-			if(R==1) turtleList.add(new DizzyTurtle(w,(i+1),rnd.nextInt(5)));
+			if(R==1) turtleList.add(new DizzyTurtle(w,(i+1),rnd.nextInt(5)+1));
 			if(R==2) turtleList.add(new AbsentMindedTurtle(w,(i+1),rnd.nextInt(100)));
 		}
 		for(int i = 0; i<turtleList.size(); i++) {
