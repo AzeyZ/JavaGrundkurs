@@ -1,7 +1,7 @@
 
 public class BankAccount {
 	private long AccountNbr;
-	private double balance;
+	private long balance;
 	private static long AccNbrGenerator = 10000;
 	private Customer customer;
 	
@@ -14,8 +14,7 @@ public class BankAccount {
 	
 	public BankAccount(Customer holder) {
 		this.customer = holder;
-		String s = new String("55" + AccNbrGenerator );
-		AccountNbr = Long.valueOf(s).longValue();
+		AccountNbr = AccNbrGenerator;
 		balance = 0;
 		AccNbrGenerator++;
 	}
@@ -24,7 +23,7 @@ public class BankAccount {
 		return customer;
 	}
 	
-	public double getAmount() {
+	public long getAmount() {
 
 		return balance;
 	}
@@ -37,12 +36,19 @@ public class BankAccount {
 		balance += amount;
 	}
 	
-	public void withdraw(double amount) {
-		balance -= amount;
+	public boolean withdraw(double amount) {
+		if((balance - amount) < 0) {
+			System.out.println("uttaget misslyckades, endast " + balance + " på kontot!");
+			return false;
+		} else
+		{
+			balance -= amount;
+			return true;
+		}
 	}
 	
 	public String toString() {
-		return " ej klar" + AccountNbr;
+		return "konto " + AccountNbr + customer + balance;
 	}
 	
 }

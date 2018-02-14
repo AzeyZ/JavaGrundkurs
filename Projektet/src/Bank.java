@@ -12,8 +12,10 @@ public class Bank {
 			}
 		}
 		Customer c = new Customer(holderName, idNr);
-		Accounts.add(new BankAccount(c));
-		return c.getBnkNr();
+		BankAccount b = new BankAccount(c);
+		Accounts.add(b);
+		sortAccounts();
+		return b.getAccountNbr();
 	}
 
 	public Customer findHolder(long idNr) {
@@ -29,6 +31,7 @@ public class Bank {
 		for(int i = 0; i<Accounts.size(); i++) {
 			if(Accounts.get(i).getAccountNbr() == nbr) {
 				Accounts.remove(i);
+				sortAccounts();
 				return true;
 			}
 		}
@@ -37,7 +40,19 @@ public class Bank {
 
 	public ArrayList<BankAccount> getAllAccounts() {
 		return Accounts;
-		//		Ej sorterad
+		
+	}
+	
+	private void sortAccounts() {
+		for(int i = 1; i< Accounts.size(); i++) {
+			if(Accounts.get(i-1).getHolder().getName().compareToIgnoreCase(Accounts.get(i).getHolder().getName()) > 0) {
+				BankAccount higer = Accounts.get(i-1);
+				BankAccount lower = Accounts.get(i);
+				Accounts.set(i-1, lower);
+				Accounts.set(i, higer);
+				i=0;
+			}
+		}
 	}
 
 	public BankAccount findByNumber(long accountNumber) {
@@ -60,8 +75,14 @@ public class Bank {
 	}
 	
 	public ArrayList<Customer> findByPartofName(String namePart){
-		//Unfinished
-		return null;
+		ArrayList <Customer> foundCustomers = new ArrayList<Customer>();
+		for(int i = 0; i<Accounts.size();i++) {
+			if(Accounts.get(i).getHolder().getName().contains(namePart)) {
+				foundCustomers.add(Accounts.get(i).getHolder());
+			}
+		}
+		
+		return foundCustomers;
 	}
 }
 

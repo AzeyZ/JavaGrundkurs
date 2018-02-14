@@ -3,7 +3,7 @@ public class Customer {
 	private String name;
 	private long idNr;
 	private long bnkNr;
-	private static long bnkNrGenerator = 10000;
+	private static long bnkNrGenerator = 1;
 
 	public Customer(String name, long idNr) {
 		this.name = name;
@@ -25,6 +25,6 @@ public class Customer {
 	}
 
 	public String toString() {
-		return name;
+		return "  (" + name + ", id " + idNr + ", kundnr " + bnkNr + "): ";
 	}
 }
