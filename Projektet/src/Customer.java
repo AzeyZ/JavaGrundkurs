@@ -25,6 +25,6 @@ public class Customer {
 	}
 
 	public String toString() {
-		return "  (" + name + ", id " + idNr + ", kundnr " + bnkNr + "): ";
+		return  name + ", id " + idNr + ", kundnr " + bnkNr ;
 	}
 }

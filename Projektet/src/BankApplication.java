@@ -27,7 +27,9 @@ public class BankApplication {
 			scan.nextLine();
 			System.out.print("namn: ");
 			String part = scanString();
-			Bank.findByPartofName(part);
+			if(Bank.findByPartofName(part).size() == 0) {
+				System.out.println("Hittade ingen användare med det namnet");
+			}
 			for(int k = 0;k<Bank.findByPartofName(part).size();k++ ) {
 				System.out.println(Bank.findByPartofName(part).get(k));
 			}
@@ -36,35 +38,43 @@ public class BankApplication {
 			System.out.print("konto: ");
 			long accAdd = scanLong();
 			scan.nextLine();
-			System.out.print("belopp: ");
-			long belopp = scanLong();
-			Bank.findByNumber(accAdd).deposit(belopp);
-			System.out.println(Bank.findByNumber(accAdd));
+			if(accExists(accAdd)) {
+				System.out.print("belopp: ");
+				long belopp = scanLong();
+				Bank.findByNumber(accAdd).deposit(belopp);
+				System.out.println(Bank.findByNumber(accAdd));
+			}
 			break;
 		case 4:  
 			System.out.print("konto: ");
 			long accWithdraw = scanLong();
 			scan.nextLine();
-			System.out.print("belopp: ");
-			long withdraw = scanLong();
-			if(Bank.findByNumber(accWithdraw).withdraw(withdraw)) {
-				System.out.println(Bank.findByNumber(accWithdraw));
-			}			
+			if(accExists(accWithdraw)) {
+				System.out.print("belopp: ");
+				long withdraw = scanLong();
+				if(Bank.findByNumber(accWithdraw).withdraw(withdraw)) {
+					System.out.println(Bank.findByNumber(accWithdraw));
+				}			
+			}
 			break;
 		case 5: 
 			System.out.print("från konto: ");
 			long accFrom = scanLong();
 			scan.nextLine();
-			System.out.print("till konto: ");
-			long accTo = scanLong();
-			scan.nextLine();
-			System.out.print("belopp: ");
-			long sum = scanLong();
-			if(Bank.findByNumber(accFrom).withdraw(sum)) {
-				System.out.println(Bank.findByNumber(accFrom));
+			if(accExists(accFrom)) {
+				System.out.print("till konto: ");
+				long accTo = scanLong();
+				scan.nextLine();
+				if(accExists(accFrom)) {
+					System.out.print("belopp: ");
+					long sum = scanLong();
+					if(Bank.findByNumber(accFrom).withdraw(sum)) {
+						System.out.println(Bank.findByNumber(accFrom));
+					}
+					Bank.findByNumber(accTo).deposit(sum);
+					System.out.println(Bank.findByNumber(accTo));
+				}
 			}
-			Bank.findByNumber(accTo).deposit(sum);
-			System.out.println(Bank.findByNumber(accTo));
 			break;
 		case 6:
 			scan.nextLine();
@@ -78,7 +88,9 @@ public class BankApplication {
 			System.out.print("konto: ");
 			long accRemove = scanLong();
 			scan.nextLine();
-			Bank.removeAccount(accRemove);
+			if(accExists(accRemove)) {
+				Bank.removeAccount(accRemove);
+			}
 			break;
 		case 8:
 			for(int i=0;i<Bank.getAllAccounts().size();i++) {
@@ -91,7 +103,17 @@ public class BankApplication {
 		}
 	}
 
-	public void printMenu() {
+	private boolean accExists(long accNbr) {
+		for(int i = 0; i<Bank.getAllAccounts().size();i++) {
+			if(Bank.getAllAccounts().get(i).getAccountNbr() == accNbr) {
+				return true;
+			}
+		}
+		System.out.println("Kunde inte hitta kontot");
+		return false;
+	}
+
+	private void printMenu() {
 		System.out.println("-------------------------------------------------------------------------------");
 		System.out.println("1. Hitta konto utifrån innehavare");
 		System.out.println("2. sök kontoinnehavare utifrån (del av) namn");
@@ -105,7 +127,7 @@ public class BankApplication {
 		System.out.print("val: ");
 	}
 
-	public int scanIntVal() { 
+	private int scanIntVal() { 
 		int i = 0;
 		boolean ok = false;
 		while(!ok) {
@@ -129,7 +151,7 @@ public class BankApplication {
 		return i;
 	}
 
-	public String scanString() { 
+	private String scanString() { 
 		String s = "error";
 		boolean ok = false;
 		while(!ok) {
@@ -149,7 +171,7 @@ public class BankApplication {
 		return s;
 	}
 
-	public long scanLong() { 
+	private long scanLong() { 
 		long i = 0;
 		boolean ok = false;
 		while(!ok) {

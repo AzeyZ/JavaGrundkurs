@@ -38,7 +38,7 @@ public class BankAccount {
 	
 	public boolean withdraw(double amount) {
 		if((balance - amount) < 0) {
-			System.out.println("uttaget misslyckades, endast " + balance + " på kontot!");
+			System.out.println("uttaget misslyckades, endast " + balance + " pÃ¥ kontot!");
 			return false;
 		} else
 		{
@@ -48,7 +48,7 @@ public class BankAccount {
 	}
 	
 	public String toString() {
-		return "konto " + AccountNbr + customer + balance;
+		return "konto " + AccountNbr + "  (" + customer +  "): " + balance ;
 	}
 	
 }

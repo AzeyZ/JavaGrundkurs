@@ -81,7 +81,6 @@ public class Bank {
 				foundCustomers.add(Accounts.get(i).getHolder());
 			}
 		}
-		
 		return foundCustomers;
 	}
 }
