@@ -20,8 +20,13 @@ public class BankApplication {
 		case 1:
 			System.out.print("id: ");
 			long idSearch = scanLong();
-			for(int print = 0; print < Bank.findAccountsForHolder(idSearch).size();print++ )
-				System.out.println(Bank.findAccountsForHolder(idSearch).get(print));
+			if(Bank.findAccountsForHolder(idSearch).size() == 0) {
+				System.out.println("Kunde inte hitta något konto med det Id nummret");	
+			} else {
+				for(int print = 0; print < Bank.findAccountsForHolder(idSearch).size();print++ ) {
+					System.out.println(Bank.findAccountsForHolder(idSearch).get(print));
+				}
+			}
 			break;
 		case 2:  
 			scan.nextLine();
@@ -41,8 +46,13 @@ public class BankApplication {
 			if(accExists(accAdd)) {
 				System.out.print("belopp: ");
 				long belopp = scanLong();
-				Bank.findByNumber(accAdd).deposit(belopp);
-				System.out.println(Bank.findByNumber(accAdd));
+				if(belopp>0) {
+					Bank.findByNumber(accAdd).deposit(belopp);
+					System.out.println(Bank.findByNumber(accAdd));
+				}
+				else {
+					System.out.println("Du kan bara sätta in ett positivt belopp, vill du ta ut pengar använd istället val 4");
+				}
 			}
 			break;
 		case 4:  
@@ -54,7 +64,10 @@ public class BankApplication {
 				long withdraw = scanLong();
 				if(Bank.findByNumber(accWithdraw).withdraw(withdraw)) {
 					System.out.println(Bank.findByNumber(accWithdraw));
-				}			
+				}
+				else {
+					System.out.println("uttaget misslyckades, endast " + Bank.findByNumber(accWithdraw).getAmount() + " på kontot!");
+				}
 			}
 			break;
 		case 5: 
@@ -70,19 +83,30 @@ public class BankApplication {
 					long sum = scanLong();
 					if(Bank.findByNumber(accFrom).withdraw(sum)) {
 						System.out.println(Bank.findByNumber(accFrom));
+						Bank.findByNumber(accTo).deposit(sum);
+						System.out.println(Bank.findByNumber(accTo));
 					}
-					Bank.findByNumber(accTo).deposit(sum);
-					System.out.println(Bank.findByNumber(accTo));
+					else {
+						System.out.println("uttaget misslyckades, endast " + Bank.findByNumber(accFrom).getAmount() + " på kontot!");
+					}
 				}
 			}
 			break;
 		case 6:
+			int antalKonto = Bank.getAllAccounts().size();
 			scan.nextLine();
 			System.out.print("namn: ");
 			String namn = scanString();
 			System.out.print("id: ");
 			long id = scanLong();
-			System.out.println("konto skapat: "+ Bank.addAccount(namn, id));
+			long bnkNbr = Bank.addAccount(namn, id);
+			int antalKontoEfter = Bank.getAllAccounts().size();
+			if(antalKonto == antalKontoEfter) {
+				System.out.println("konto med detta id finns redan");
+			}
+			else {
+				System.out.println("nytt konto skapat: " + bnkNbr);
+			}
 			break;
 		case 7: 
 			System.out.print("konto: ");
@@ -90,6 +114,10 @@ public class BankApplication {
 			scan.nextLine();
 			if(accExists(accRemove)) {
 				Bank.removeAccount(accRemove);
+				System.out.println("Konto: "+ accRemove + " har tagits bort");
+			}
+			else {
+				System.out.println("Kunde inte hitta något konto med det nummret");
 			}
 			break;
 		case 8:

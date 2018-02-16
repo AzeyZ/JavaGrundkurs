@@ -15,7 +15,7 @@ public class Customer {
 	public String getName() {
 		return name;
 	}
-	
+
 	public long getIdNr() {
 		return idNr;
 	}
