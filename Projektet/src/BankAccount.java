@@ -1,7 +1,7 @@
 
 public class BankAccount {
 	private long AccountNbr;
-	private long balance;
+	private double balance;
 	private static long AccNbrGenerator = 10000;
 	private Customer customer;
 
@@ -23,7 +23,7 @@ public class BankAccount {
 		return customer;
 	}
 
-	public long getAmount() {
+	public double getAmount() {
 
 		return balance;
 	}
