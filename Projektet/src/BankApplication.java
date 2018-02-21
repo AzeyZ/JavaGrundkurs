@@ -30,10 +30,11 @@ public class BankApplication {
 				}
 			}
 			break;
+			
 		case 2:  
 			scan.nextLine();
 			System.out.print("namn: ");
-			name = scanString();
+			name = scanStringName();
 			if(Bank.findByPartofName(name).size() == 0) {
 				System.out.println("Hittade ingen användare med det namnet");
 			}
@@ -41,29 +42,26 @@ public class BankApplication {
 				System.out.println(Bank.findByPartofName(name).get(k));
 			}
 			break;
+			
 		case 3:
 			System.out.print("konto: ");
 			long accAdd = scanLong();
 			scan.nextLine();
 			if(accExists(accAdd)) {
 				System.out.print("belopp: ");
-				double belopp = scanDouble();
-				if(belopp>0) {
-					Bank.findByNumber(accAdd).deposit(belopp);
-					System.out.println(Bank.findByNumber(accAdd));
-				}
-				else {
-					System.out.println("Du kan bara sätta in ett positivt belopp, vill du ta ut pengar anvånd istället val 4");
-				}
+				double belopp = scanDoubleBelopp();
+				Bank.findByNumber(accAdd).deposit(belopp);
+				System.out.println(Bank.findByNumber(accAdd));
 			}
 			break;
+			
 		case 4:  
 			System.out.print("konto: ");
 			long accWithdraw = scanLong();
 			scan.nextLine();
 			if(accExists(accWithdraw)) {
 				System.out.print("belopp: ");
-				double withdraw = scanDouble();
+				double withdraw = scanDoubleBelopp();
 				if(Bank.findByNumber(accWithdraw).withdraw(withdraw)) {
 					System.out.println(Bank.findByNumber(accWithdraw));
 				}
@@ -72,6 +70,7 @@ public class BankApplication {
 				}
 			}
 			break;
+			
 		case 5: 
 			System.out.print("från konto: ");
 			long accFrom = scanLong();
@@ -82,7 +81,7 @@ public class BankApplication {
 				scan.nextLine();
 				if(accExists(accFrom)) {
 					System.out.print("belopp: ");
-					double sum = scanDouble();
+					double sum = scanDoubleBelopp();
 					if(Bank.findByNumber(accFrom).withdraw(sum)) {
 						System.out.println(Bank.findByNumber(accFrom));
 						Bank.findByNumber(accTo).deposit(sum);
@@ -94,11 +93,12 @@ public class BankApplication {
 				}
 			}
 			break;
+			
 		case 6:
 			int antalKonto = Bank.getAllAccounts().size();
 			scan.nextLine();
 			System.out.print("namn: ");
-			name = scanString();
+			name = scanStringName();
 			System.out.print("id: ");
 			id = scanLong();
 			long bnkNbr = Bank.addAccount(name, id);
@@ -110,6 +110,7 @@ public class BankApplication {
 				System.out.println("nytt konto skapat: " + bnkNbr);
 			}
 			break;
+			
 		case 7: 
 			System.out.print("konto: ");
 			long accRemove = scanLong();
@@ -122,11 +123,13 @@ public class BankApplication {
 				System.out.println("Kunde inte hitta något konto med det nummret");
 			}
 			break;
+			
 		case 8:
 			for(int i=0;i<Bank.getAllAccounts().size();i++) {
 				System.out.println(Bank.getAllAccounts().get(i));
 			}
 			break;
+			
 		case 9:  
 			GO = false;
 			break;
@@ -167,7 +170,6 @@ public class BankApplication {
 				i = scan.nextInt();
 				if(!(i<10 && i>0)) {
 					System.out.println("Skriv en siffra mellan 0 till 9");
-					printMenu();
 				}
 			}
 			catch (Exception e)
@@ -181,7 +183,7 @@ public class BankApplication {
 		return i;
 	}
 
-	private String scanString() { 
+	private String scanStringName() { 
 		String s = "error";
 		boolean ok = false;
 		while(!ok) {
@@ -219,8 +221,8 @@ public class BankApplication {
 		}
 		return i;
 	}
-	
-	private double scanDouble() { 
+
+	private double scanDoubleBelopp() { 
 		double i = 0;
 		boolean ok = false;
 		while(!ok) {
@@ -228,6 +230,12 @@ public class BankApplication {
 			{
 				ok = true;
 				i = scan.nextDouble();
+				if(i<0) {
+					System.out.println("Det måste vara ett positivt belopp");
+					System.out.print("belopp: ");
+					ok = false;
+				}
+
 			}
 			catch (Exception e)
 			{
